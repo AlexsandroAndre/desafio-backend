@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class History extends Model
+class CreditHistory extends Model
 {
     protected $fillable = ['client_id', 'order_id', 'card_number', 'value', 'date'];
     protected $hidden = ['created_at', 'updated_at'];

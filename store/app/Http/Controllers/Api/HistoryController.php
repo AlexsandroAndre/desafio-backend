@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\History;
-use App\Api\ApiError;
+use App\CreditHistory;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class HistoryController extends Controller
 {
-    public function __construct(History $history)
+    public function __construct(CreditHistory $history)
 	{
 		$this->history = $history;
     }
@@ -39,8 +39,9 @@ class HistoryController extends Controller
 
     public function store(Request $request)
     {
-        $histories = collect($request)->only('client_id', 'order_id')->toArray();
-        $histories['value'] = $request->get("value_to_pay");
+        //$histories = collect($request)->only('client_id', 'order_id')->toArray();
+        $histories = $request->all();
+        $histories['value'] = $request->value_to_pay;
         $histories['order_id'] = $request->get("cart_id");
         $histories['card_number'] = $request->credit_card['number'];
         $histories['date'] = today();

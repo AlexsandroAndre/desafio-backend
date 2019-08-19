@@ -20,7 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 /**
  * CREDPAGO DESAFIO API
  */
-Route::namespace('api')->name('api.')->group(function(){
+Route::namespace('Api')->name('api.')->group(function(){
     Route::prefix('/v1')->group(function(){
         /**
          * BUY
@@ -55,7 +55,7 @@ Route::namespace('api')->name('api.')->group(function(){
 			Route::get('/', 'ProductController@index')->name('products');
             Route::get('/{product_id}', 'ProductController@show')->name('single_product');
             Route::post('/', 'ProductController@store')->name('store_products');
-		});
+        });
     });
 });
 /**

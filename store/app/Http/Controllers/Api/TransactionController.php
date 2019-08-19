@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Transaction;
 use App\CreditCard;
-use App\Api\ApiError;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Api\CreditCardController;
@@ -46,10 +46,9 @@ class TransactionController extends Controller
     {
 		try
 		{
-			$data = collect($request->get("credit_card"))->only('client_id', 'cart_id', 'client_name', 'value_to_pay')
-				->toArray();
-				
+			$data = $request->all();
 			$data['card_number'] = $request->credit_card['number'];
+			
 			$this->transaction->create($data);
 			$this->creditCardController->store($request);
 			$this->historyController->store($request);
@@ -59,9 +58,9 @@ class TransactionController extends Controller
 		{
     		if(config('app.debug'))
     		{
-    			return response()->json(ApiError::errorMessage($e->getMessage(), 400));
+    			return response()->json($e->getMessage(), 400);
     		}
-    		return response()->json(ApiError::errorMessage('Desculpe não podemos realizar sua compra.', 400));
+    		return response()->json('Desculpe não podemos realizar sua compra.', 400);
     	}
 	}
 }

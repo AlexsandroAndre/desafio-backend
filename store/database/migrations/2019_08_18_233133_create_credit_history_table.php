@@ -13,7 +13,7 @@ class CreateCreditHistoryTable extends Migration
      */
     public function up()
     {
-        Schema::create('credit_history', function (Blueprint $table) {
+        Schema::create('credit_histories', function (Blueprint $table) {
             $table->string('client_id');
             $table->string('order_id');
             $table->string('card_number');
@@ -29,6 +29,6 @@ class CreateCreditHistoryTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('credit_history');
+        Schema::dropIfExists('credit_histories');
     }
 }

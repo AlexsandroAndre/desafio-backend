@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\CreditCard;
-use App\Api\ApiError;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -36,10 +36,9 @@ class CreditCardController extends Controller
 
     public function store(Request $request)
     {   
-        $data = collect($request->get("credit_card"))->only('card_holder_name', 'cvv', 'exp_date')
-            ->toArray();
-
+        $data = $request->all();
         $data['card_number'] = $request->credit_card['number'];
+        $data['cvv'] = $request->credit_card['cvv'];
         $this->creditCard->create($data);
     }
 }

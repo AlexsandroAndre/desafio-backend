@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Cart;
-use App\Api\ApiError;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -42,9 +42,9 @@ class CartController extends Controller
 		{
     		if(config('app.debug'))
     		{
-    			return response()->json(ApiError::errorMessage($e->getMessage(), 400));
+    			return response()->json($e->getMessage(), 400);
     		}
-    		return response()->json(ApiError::errorMessage('Houve um erro ao criar o carrinho.', 400));
+    		return response()->json('Houve um erro ao criar o carrinho.', 400);
     	}
 	}
 }
